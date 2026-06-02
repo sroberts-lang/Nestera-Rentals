@@ -157,7 +157,7 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            background: #0a0a0a;
             color: var(--light);
             display: flex;
             flex-direction: column;
@@ -176,9 +176,10 @@
             right: 0;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
             border-radius: 50%;
             animation: float 6s ease-in-out infinite;
+            z-index: 2;
         }
         
         .hero::after {
@@ -188,9 +189,10 @@
             left: 0;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
             border-radius: 50%;
             animation: float 8s ease-in-out infinite reverse;
+            z-index: 2;
         }
         
         @keyframes float {
@@ -200,7 +202,7 @@
         
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             animation: fadeInUp 1s ease-out;
         }
         
@@ -636,6 +638,12 @@
                 font-size: 2.5rem;
             }
             
+            .hero video {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+            
             .section {
                 padding: 4rem 1.5rem;
             }
@@ -666,12 +674,20 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <img src="Nestera_Logo_Animated_Gif.gif" alt="Nestera Solutions" style="height: 120px; width: auto; margin-bottom: 2rem; animation: fadeInDown 1s ease-out;">
-            <h1>Luxury Living Reimagined</h1>
-            <p class="hero-subtitle">Exclusive properties in Defence Housing Authority's most prestigious locations</p>
-            <button class="cta-button" onclick="document.getElementById('properties').scrollIntoView({behavior: 'smooth'})">
+    <section class="hero" style="position: relative; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+            <source src="Nestera_Logo_Animation.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Dark Overlay for Text Readability -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2;"></div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content" style="position: relative; z-index: 3; text-align: center;">
+            <h1 style="animation: fadeInDown 0.8s ease-out;">Luxury Living Reimagined</h1>
+            <p class="hero-subtitle" style="animation: fadeInUp 0.8s ease-out 0.2s both;">Exclusive properties in Defence Housing Authority's most prestigious locations</p>
+            <button class="cta-button" onclick="document.getElementById('properties').scrollIntoView({behavior: 'smooth'})" style="animation: fadeInUp 0.8s ease-out 0.4s both;">
                 Explore Collection
             </button>
         </div>
