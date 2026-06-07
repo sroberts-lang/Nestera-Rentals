@@ -9,136 +9,89 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
+
         body {
             font-family: 'Lora', serif;
-            background: #0a0a0a;
-            color: #f5f5f5;
+            background: #f9f6f1;
+            color: #1a1a1a;
             line-height: 1.8;
             overflow-x: hidden;
         }
-        
+
         :root {
-            --gold: #d4af37;
-            --dark: #0a0a0a;
-            --light: #f5f5f5;
-            --accent-gold: #c9a961;
-            --deep-black: #050505;
+            --gold: #c9a74b;
+            --gold-dark: #a8862f;
+            --gold-light: #e8d49a;
+            --dark: #111111;
+            --light: #f9f6f1;
+            --cream: #f2ece2;
+            --text-dark: #1a1a1a;
+            --text-mid: #4a4a4a;
+            --text-light: #888;
+            --border-gold: rgba(201, 167, 75, 0.3);
         }
-        
-        /* Scroll Animations */
+
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
         @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
-        
+
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Navigation */
         nav {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 3rem;
+            background: rgba(249, 246, 241, 0.97);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid var(--border-gold);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
         }
-        
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--light);
-            font-family: 'Playfair Display', serif;
+
+        .nav-logo img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
         }
-        
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--accent-gold) 100%);
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--dark);
-            font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-        
+
         nav ul {
             display: flex;
             list-style: none;
             gap: 3rem;
         }
-        
+
         nav a {
-            color: var(--light);
+            color: var(--text-dark);
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.82rem;
+            font-weight: 600;
             transition: color 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             position: relative;
         }
-        
+
         nav a::after {
             content: '';
             position: absolute;
@@ -149,16 +102,14 @@
             background: var(--gold);
             transition: width 0.3s;
         }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
+
+        nav a:hover { color: var(--gold-dark); }
+        nav a:hover::after { width: 100%; }
+
+        /* Hero */
         .hero {
             min-height: 100vh;
-            background: #0a0a0a;
-            color: var(--light);
+            color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -168,44 +119,12 @@
             position: relative;
             overflow: hidden;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-            z-index: 2;
-        }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-            z-index: 2;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(30px); }
-        }
-        
+
         .hero-content {
             position: relative;
             z-index: 3;
-            animation: fadeInUp 1s ease-out;
         }
-        
+
         .hero h1 {
             font-size: 5rem;
             font-weight: 700;
@@ -213,256 +132,339 @@
             letter-spacing: -1px;
             line-height: 1.1;
             font-family: 'Playfair Display', serif;
-            background: linear-gradient(135deg, var(--light) 0%, var(--gold) 100%);
+            background: linear-gradient(135deg, #fff 0%, var(--gold-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .hero-subtitle {
-            font-size: 1.4rem;
-            color: #ccc;
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.88);
             margin-bottom: 3rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             font-weight: 300;
             letter-spacing: 0.5px;
-            animation: fadeInUp 1.2s ease-out;
         }
-        
+
         .cta-button {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--accent-gold) 100%);
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #fff;
             padding: 1.1rem 3rem;
             border: none;
-            border-radius: 2px;
-            font-size: 0.9rem;
+            border-radius: 3px;
+            font-size: 0.88rem;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-            animation: fadeInUp 1.4s ease-out;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(201, 167, 75, 0.4);
         }
-        
+
         .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(201, 167, 75, 0.55);
         }
-        
+
         /* Sections */
         .section {
             padding: 8rem 3rem;
             position: relative;
             overflow: hidden;
         }
-        
-        .section-light {
-            background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
-            color: var(--light);
-        }
-        
+
+        .section-light { background: var(--light); }
+        .section-cream { background: var(--cream); }
+
         .section-title {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.5px;
+            margin-bottom: 0.8rem;
             font-family: 'Playfair Display', serif;
-            color: var(--gold);
+            color: var(--dark);
             text-transform: uppercase;
+            letter-spacing: -0.5px;
         }
-        
+
+        .section-title-accent {
+            display: block;
+            width: 55px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            margin: 0.8rem 0 2rem 0;
+            border-radius: 2px;
+        }
+
         .section-subtitle {
-            font-size: 1.2rem;
-            color: #aaa;
+            font-size: 1.05rem;
+            color: var(--text-mid);
             margin-bottom: 4rem;
-            max-width: 700px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
+            max-width: 680px;
+            font-weight: 400;
         }
-        
+
         /* Properties Grid */
         .properties-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
+            gap: 2.5rem;
+            margin-top: 3rem;
             max-width: 1300px;
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .property-card {
-            background: rgba(20, 20, 20, 0.8);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 2px;
+            background: #fff;
+            border: 1px solid rgba(201, 167, 75, 0.18);
+            border-radius: 4px;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
-            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             animation: scaleIn 0.6s ease-out backwards;
         }
-        
+
         .property-card:nth-child(1) { animation-delay: 0s; }
         .property-card:nth-child(2) { animation-delay: 0.1s; }
         .property-card:nth-child(3) { animation-delay: 0.2s; }
         .property-card:nth-child(4) { animation-delay: 0.3s; }
         .property-card:nth-child(5) { animation-delay: 0.4s; }
-        
+
         .property-card:hover {
-            transform: translateY(-15px);
+            transform: translateY(-12px);
             border-color: var(--gold);
-            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 25px 55px rgba(201, 167, 75, 0.2);
         }
-        
+
         .property-image {
             width: 100%;
-            height: 300px;
+            height: 280px;
             background-size: cover;
             background-position: center;
             position: relative;
             overflow: hidden;
             transition: transform 0.6s ease;
         }
-        
-        .property-card:hover .property-image {
-            transform: scale(1.05);
-        }
-        
+
+        .property-card:hover .property-image { transform: scale(1.04); }
+
         .image-count {
             position: absolute;
             bottom: 15px;
             right: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            color: var(--gold);
-            padding: 0.5rem 1rem;
-            border-radius: 2px;
-            font-size: 0.85rem;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(8px);
+            color: var(--gold-light);
+            padding: 0.4rem 0.9rem;
+            border-radius: 3px;
+            font-size: 0.78rem;
             font-weight: 600;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(201, 167, 75, 0.4);
         }
-        
-        .property-info {
-            padding: 2.5rem;
-        }
-        
+
+        .property-info { padding: 2.2rem; }
+
         .property-meta {
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
-        
+
         .property-phase {
-            font-size: 0.75rem;
-            color: var(--gold);
-            font-weight: 600;
+            font-size: 0.72rem;
+            color: var(--gold-dark);
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
-        
+
         .property-rental-type {
-            font-size: 0.7rem;
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold);
-            padding: 0.5rem 1rem;
-            border-radius: 2px;
-            font-weight: 600;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            font-size: 0.68rem;
+            background: rgba(201, 167, 75, 0.1);
+            color: var(--gold-dark);
+            padding: 0.4rem 0.9rem;
+            border-radius: 3px;
+            font-weight: 700;
+            border: 1px solid var(--border-gold);
         }
-        
+
         .property-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1.2rem;
-            color: var(--light);
+            color: var(--dark);
             font-family: 'Playfair Display', serif;
         }
-        
+
         .property-specs {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 1.8rem;
-            padding-bottom: 1.8rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(201, 167, 75, 0.15);
         }
-        
-        .spec {
-            text-align: center;
-        }
-        
+
+        .spec { text-align: center; }
+
         .spec-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--gold);
-            margin-bottom: 0.3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            margin-bottom: 0.2rem;
         }
-        
+
         .spec-label {
-            font-size: 0.75rem;
-            color: #888;
+            font-size: 0.7rem;
+            color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .property-price {
-            font-size: 1.8rem;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 1.2rem;
             font-family: 'Playfair Display', serif;
         }
-        
+
         .property-description {
-            font-size: 0.95rem;
-            color: #aaa;
+            font-size: 0.9rem;
+            color: var(--text-mid);
             line-height: 1.7;
             margin-bottom: 1.8rem;
         }
-        
+
         .view-btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--accent-gold) 100%);
-            color: var(--dark);
+            background: var(--dark);
+            color: var(--gold-light);
             padding: 1rem;
             border: none;
-            border-radius: 2px;
+            border-radius: 3px;
             cursor: pointer;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: all 0.3s;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
-        
+
         .view-btn:hover {
+            background: var(--gold-dark);
+            color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-        
+
+        /* DHA Cards */
+        .dha-card {
+            border-radius: 4px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid rgba(201, 167, 75, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+
+        .dha-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(201, 167, 75, 0.2);
+            border-color: var(--gold);
+        }
+
+        .dha-card-body { padding: 2.2rem; }
+
+        .dha-card-body h3 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .dha-card-body p {
+            color: var(--text-mid);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        .dha-label {
+            color: var(--gold-light);
+            font-family: 'Lora', serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Gallery items */
+        .gallery-item {
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 167, 75, 0.2);
+            transition: all 0.4s;
+            cursor: pointer;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.04);
+            box-shadow: 0 15px 35px rgba(201, 167, 75, 0.2);
+            border-color: var(--gold);
+        }
+
+        /* Contact */
+        .contact-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(201, 167, 75, 0.35);
+            border-radius: 3px;
+            background: #fff;
+            color: var(--text-dark);
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 167, 75, 0.12);
+        }
+
+        .contact-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
         /* Modal */
         .modal {
             display: none;
             position: fixed;
             z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(5px);
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.92);
+            backdrop-filter: blur(6px);
         }
-        
-        .modal.active {
-            display: flex;
-        }
-        
+
+        .modal.active { display: flex; }
+
         .modal-content {
             position: relative;
             max-width: 95%;
@@ -471,92 +473,86 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .modal-image {
             max-width: 100%;
             max-height: 75vh;
             object-fit: contain;
         }
-        
+
         .modal-header {
-            background: rgba(10, 10, 10, 0.95);
-            color: var(--gold);
-            padding: 1.5rem 2rem;
+            background: rgba(17,17,17,0.97);
+            color: var(--gold-light);
+            padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(201,167,75,0.2);
         }
-        
+
         .modal-title {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .modal-close {
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
             background: none;
             border: none;
-            color: var(--gold);
+            color: var(--gold-light);
             transition: color 0.3s;
         }
-        
-        .modal-close:hover {
-            color: var(--light);
-        }
-        
+
+        .modal-close:hover { color: #fff; }
+
         .modal-nav {
-            background: rgba(10, 10, 10, 0.95);
-            color: var(--gold);
-            padding: 1.5rem;
+            background: rgba(17,17,17,0.97);
+            color: var(--gold-light);
+            padding: 1.2rem;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 2rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 1px solid rgba(201,167,75,0.2);
         }
-        
+
         .modal-nav button {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--accent-gold) 100%);
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #fff;
             border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 2px;
+            padding: 0.6rem 1.4rem;
+            border-radius: 3px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
+            font-size: 0.82rem;
         }
-        
+
         .modal-nav button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 20px rgba(201,167,75,0.4);
         }
-        
-        .modal-nav button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        
+
+        .modal-nav button:disabled { opacity: 0.35; cursor: not-allowed; }
+
         .image-counter {
-            color: var(--gold);
+            color: var(--gold-light);
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.92rem;
         }
-        
-        /* WhatsApp Button */
+
+        /* WhatsApp */
         .whatsapp-btn {
             position: fixed;
             bottom: 2.5rem;
             right: 2.5rem;
-            width: 70px;
-            height: 70px;
+            width: 66px;
+            height: 66px;
             background: #25D366;
             border-radius: 50%;
             display: flex;
@@ -564,28 +560,27 @@
             justify-content: center;
             cursor: pointer;
             z-index: 99;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 20px rgba(37,211,102,0.45);
             transition: all 0.3s;
             text-decoration: none;
             color: white;
             border: none;
             font-size: 1.8rem;
-            line-height: 1;
         }
-        
+
         .whatsapp-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+            transform: scale(1.12);
+            box-shadow: 0 8px 30px rgba(37,211,102,0.6);
         }
-        
+
         /* Footer */
         footer {
-            background: linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
-            color: var(--light);
+            background: var(--dark);
+            color: #c8c8c8;
             padding: 5rem 3rem 2rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 3px solid var(--gold);
         }
-        
+
         .footer-content {
             max-width: 1300px;
             margin: 0 auto;
@@ -594,77 +589,66 @@
             gap: 3rem;
             margin-bottom: 3rem;
         }
-        
+
+        .footer-logo img {
+            height: 95px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
         .footer-section h4 {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             margin-bottom: 1.5rem;
-            color: var(--gold);
+            color: var(--gold-light);
             font-family: 'Playfair Display', serif;
         }
-        
+
         .footer-section p,
         .footer-section a {
-            font-size: 0.9rem;
-            color: #aaa;
+            font-size: 0.88rem;
+            color: #999;
             text-decoration: none;
-            line-height: 2;
+            line-height: 2.2;
             transition: color 0.3s;
         }
-        
-        .footer-section a:hover {
-            color: var(--gold);
-        }
-        
+
+        .footer-section a:hover { color: var(--gold-light); }
+
         .footer-bottom {
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-top: 1px solid rgba(201,167,75,0.15);
             padding-top: 2rem;
             text-align: center;
-            font-size: 0.85rem;
-            color: #666;
+            font-size: 0.82rem;
+            color: #555;
         }
-        
+
+        /* Gold thin divider */
+        .gold-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-            }
-            
-            nav ul {
-                gap: 1.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero video {
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-            }
-            
-            .section {
-                padding: 4rem 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .whatsapp-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
+            nav { padding: 1rem 1.5rem; }
+            nav ul { gap: 1.5rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .section { padding: 4rem 1.5rem; }
+            .section-title { font-size: 2rem; }
+            .whatsapp-btn { width: 56px; height: 56px; font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-logo">
-            <img src="Nestera_Logo.png" alt="Nestera Solutions" style="height: 50px; width: auto;">
+            <img src="Nestera_Logo_NS_Gold.png" alt="Nestera Solutions">
         </div>
         <ul>
             <li><a href="#properties">Properties</a></li>
@@ -675,15 +659,10 @@
 
     <!-- Hero Section -->
     <section class="hero" style="position: relative; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center;">
-        <!-- Background Video -->
         <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
             <source src="Nestera_Logo_Animation.mp4" type="video/mp4">
         </video>
-        
-        <!-- Dark Overlay for Text Readability -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2;"></div>
-        
-        <!-- Hero Content -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); z-index: 2;"></div>
         <div class="hero-content" style="position: relative; z-index: 3; text-align: center;">
             <h1 style="animation: fadeInDown 0.8s ease-out;">Luxury Living Reimagined</h1>
             <p class="hero-subtitle" style="animation: fadeInUp 0.8s ease-out 0.2s both;">Exclusive properties in Defence Housing Authority's most prestigious locations</p>
@@ -693,105 +672,113 @@
         </div>
     </section>
 
+    <div class="gold-divider"></div>
+
     <!-- Properties Section -->
     <section id="properties" class="section section-light">
         <div style="max-width: 1400px; margin: 0 auto;">
             <h2 class="section-title animate-on-scroll">Curated Estates</h2>
-            <p class="section-subtitle animate-on-scroll">Handpicked luxury residences across DHA's most coveted phases - Click to view complete galleries</p>
+            <span class="section-title-accent animate-on-scroll"></span>
+            <p class="section-subtitle animate-on-scroll">Handpicked luxury residences across DHA's most coveted phases — click any card to view the full gallery</p>
             <div class="properties-grid" id="propertiesGrid"></div>
         </div>
     </section>
 
+    <div class="gold-divider"></div>
+
     <!-- Why DHA Section -->
-    <section id="why-dha" class="section section-light">
+    <section id="why-dha" class="section section-cream">
         <div style="max-width: 1400px; margin: 0 auto;">
             <h2 class="section-title animate-on-scroll">The DHA Advantage</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-top: 4rem;">
-                <!-- Prime Locale Card - Dolmen Mall DHA -->
-                <div class="animate-on-scroll" style="border-radius: 2px; overflow: hidden; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(212, 175, 55, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <span class="section-title-accent animate-on-scroll"></span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 4rem;">
+
+                <div class="dha-card animate-on-scroll">
                     <div style="width: 100%; height: 220px; background-image: url('DHA_Shopping.jpg'); background-size: cover; background-position: center; position: relative;">
-                        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 100%);"></div>
-                        <div style="position: absolute; bottom: 20px; left: 20px; color: var(--gold); font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">DOLMEN MALL · DHA PHASE 6</div>
+                        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.12) 100%);"></div>
+                        <div style="position: absolute; bottom: 16px; left: 20px;" class="dha-label">Dolmen Mall · DHA Phase 6</div>
                     </div>
-                    <div style="padding: 2.5rem;">
-                        <h3 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.3rem; font-family: 'Playfair Display', serif;">Prime Locale</h3>
-                        <p style="color: #aaa; line-height: 1.7;">Dolmen Mall, Packages Mall, and premium shopping districts within walking distance. Fine dining and boutique experiences at your doorstep</p>
+                    <div class="dha-card-body">
+                        <h3>Prime Locale</h3>
+                        <p>Dolmen Mall, Packages Mall, and premium shopping districts within walking distance. Fine dining and boutique experiences at your doorstep.</p>
                     </div>
                 </div>
-                
-                <!-- Fortified Security Card - DHA Gates -->
-                <div class="animate-on-scroll" style="border-radius: 2px; overflow: hidden; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(212, 175, 55, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+
+                <div class="dha-card animate-on-scroll">
                     <div style="width: 100%; height: 220px; background-image: url('247_security_All_Phases.webp'); background-size: cover; background-position: center; position: relative;">
-                        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 100%);"></div>
-                        <div style="position: absolute; bottom: 20px; left: 20px; color: var(--gold); font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">24/7 SECURITY · ALL PHASES</div>
+                        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.12) 100%);"></div>
+                        <div style="position: absolute; bottom: 16px; left: 20px;" class="dha-label">24/7 Security · All Phases</div>
                     </div>
-                    <div style="padding: 2.5rem;">
-                        <h3 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.3rem; font-family: 'Playfair Display', serif;">Fortified Security</h3>
-                        <p style="color: #aaa; line-height: 1.7;">DHA's world-renowned 24/7 elite security personnel, multiple gated entry points, CCTV surveillance systems, and controlled access protocols</p>
+                    <div class="dha-card-body">
+                        <h3>Fortified Security</h3>
+                        <p>DHA's world-renowned 24/7 elite security personnel, multiple gated entry points, CCTV surveillance systems, and controlled access protocols.</p>
                     </div>
                 </div>
-                
-                <!-- World Class Amenities Card - Defence Raya Golf -->
-                <div class="animate-on-scroll" style="border-radius: 2px; overflow: hidden; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(212, 175, 55, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+
+                <div class="dha-card animate-on-scroll">
                     <div style="width: 100%; height: 220px; background-image: url('DHA_Golf_balcony.jpg'); background-size: cover; background-position: center; position: relative;">
-                        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 100%);"></div>
-                        <div style="position: absolute; bottom: 20px; left: 20px; color: var(--gold); font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">DEFENCE RAYA GOLF · PHASE 6</div>
+                        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.12) 100%);"></div>
+                        <div style="position: absolute; bottom: 16px; left: 20px;" class="dha-label">Defence Raya Golf · Phase 6</div>
                     </div>
-                    <div style="padding: 2.5rem;">
-                        <h3 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.3rem; font-family: 'Playfair Display', serif;">Championship Golf</h3>
-                        <p style="color: #aaa; line-height: 1.7;">Defence Raya Golf & Country Club features an 18-hole championship course, plus world-class sporting and country club facilities</p>
+                    <div class="dha-card-body">
+                        <h3>Championship Golf</h3>
+                        <p>Defence Raya Golf & Country Club features an 18-hole championship course, plus world-class sporting and country club facilities.</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Additional Images Grid - DHA Specific -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 5rem;">
-                <!-- Defence Raya Golf Course -->
-                <div class="animate-on-scroll" style="border-radius: 2px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(212, 175, 55, 0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 4rem;">
+                <div class="gallery-item animate-on-scroll">
                     <div style="width: 100%; height: 200px; background-image: url('DHA_Golf.jpg'); background-size: cover; background-position: center;">
-                        <div style="width: 100%; height: 100%; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%); display: flex; align-items: flex-end; padding: 1.5rem; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px;">Championship Golf</div>
+                        <div style="width: 100%; height: 100%; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 100%); display: flex; align-items: flex-end; padding: 1.2rem;">
+                            <span style="color: var(--gold-light); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;">Championship Golf</span>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Dolmen Mall Shopping -->
-                <div class="animate-on-scroll" style="border-radius: 2px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(212, 175, 55, 0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <div class="gallery-item animate-on-scroll">
                     <div style="width: 100%; height: 200px; background-image: url('Dollmain_Mall.jpg'); background-size: cover; background-position: center;">
-                        <div style="width: 100%; height: 100%; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%); display: flex; align-items: flex-end; padding: 1.5rem; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px;">Prime Shopping</div>
+                        <div style="width: 100%; height: 100%; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 100%); display: flex; align-items: flex-end; padding: 1.2rem;">
+                            <span style="color: var(--gold-light); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;">Prime Shopping</span>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- DHA Security -->
-                <div class="animate-on-scroll" style="border-radius: 2px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(212, 175, 55, 0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <div class="gallery-item animate-on-scroll">
                     <div style="width: 100%; height: 200px; background-image: url('Defence-Raya.jpg'); background-size: cover; background-position: center;">
-                        <div style="width: 100%; height: 100%; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%); display: flex; align-items: flex-end; padding: 1.5rem; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px;">Fortified Security</div>
+                        <div style="width: 100%; height: 100%; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 100%); display: flex; align-items: flex-end; padding: 1.2rem;">
+                            <span style="color: var(--gold-light); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;">Fortified Security</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="gold-divider"></div>
+
     <!-- Contact Section -->
     <section id="contact" class="section section-light">
-        <div style="max-width: 700px; margin: 0 auto;">
+        <div style="max-width: 680px; margin: 0 auto;">
             <h2 class="section-title animate-on-scroll">Inquire Now</h2>
+            <span class="section-title-accent animate-on-scroll"></span>
+            <p class="section-subtitle animate-on-scroll" style="margin-bottom: 2.5rem;">Our team is ready to help you find your perfect luxury residence in DHA Lahore.</p>
             <form onsubmit="handleContactForm(event)" style="display: grid; gap: 1.5rem; animation: fadeInUp 0.8s ease-out;">
                 <div>
-                    <label style="display: block; margin-bottom: 0.8rem; color: var(--gold); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Full Name</label>
-                    <input type="text" placeholder="Your name" required style="width: 100%; padding: 1rem; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 2px; background: rgba(20, 20, 20, 0.8); color: var(--light); font-family: 'Lora', serif;">
+                    <label class="contact-label">Full Name</label>
+                    <input type="text" class="contact-input" placeholder="Your name" required>
                 </div>
                 <div>
-                    <label style="display: block; margin-bottom: 0.8rem; color: var(--gold); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Email</label>
-                    <input type="email" placeholder="your@email.com" required style="width: 100%; padding: 1rem; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 2px; background: rgba(20, 20, 20, 0.8); color: var(--light); font-family: 'Lora', serif;">
+                    <label class="contact-label">Email</label>
+                    <input type="email" class="contact-input" placeholder="your@email.com" required>
                 </div>
                 <div>
-                    <label style="display: block; margin-bottom: 0.8rem; color: var(--gold); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Phone</label>
-                    <input type="tel" placeholder="+92 XXX XXXXXXX" required style="width: 100%; padding: 1rem; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 2px; background: rgba(20, 20, 20, 0.8); color: var(--light); font-family: 'Lora', serif;">
+                    <label class="contact-label">Phone</label>
+                    <input type="tel" class="contact-input" placeholder="+92 XXX XXXXXXX" required>
                 </div>
                 <div>
-                    <label style="display: block; margin-bottom: 0.8rem; color: var(--gold); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Message</label>
-                    <textarea placeholder="Tell us what you're looking for..." required style="width: 100%; padding: 1rem; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 2px; background: rgba(20, 20, 20, 0.8); color: var(--light); font-family: 'Lora', serif; min-height: 140px;"></textarea>
+                    <label class="contact-label">Message</label>
+                    <textarea class="contact-input" placeholder="Tell us what you're looking for..." required style="min-height: 140px; resize: vertical;"></textarea>
                 </div>
-                <button type="submit" class="cta-button" style="margin-top: 1rem;">Send Inquiry</button>
+                <button type="submit" class="cta-button" style="margin-top: 0.5rem;">Send Inquiry</button>
             </form>
         </div>
     </section>
@@ -800,7 +787,9 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <img src="Nestera_Logo.png" alt="Nestera Solutions" style="height: 60px; width: auto; margin-bottom: 1rem;">
+                <div class="footer-logo">
+                    <img src="Nestera_Logo_Full_Light_Brown.png" alt="Nestera Solutions">
+                </div>
                 <p>Premium luxury rental properties across Defence Housing Authority's most prestigious phases in Lahore.</p>
             </div>
             <div class="footer-section">
@@ -811,10 +800,14 @@
             </div>
             <div class="footer-section">
                 <h4>Get in Touch</h4>
-                <p>Lahore, Pakistan<br><a href="mailto:info@nesterasolutions.com">info@nesterasolutions.com</a><br><a href="https://wa.me/923239944449">WhatsApp: +92 323 9944449</a></p>
+                <p>Lahore, Pakistan<br>
+                <a href="mailto:info@nesterasolutions.com">info@nesterasolutions.com</a><br>
+                <a href="https://wa.me/923239944449">WhatsApp: +92 323 9944449</a></p>
             </div>
         </div>
-        <div class="footer-bottom"><p>© 2024 Nestera. Luxury Living Redefined. All rights reserved.</p></div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Nestera Solutions. Luxury Living Redefined. All rights reserved.</p>
+        </div>
     </footer>
 
     <!-- Image Gallery Modal -->
@@ -826,9 +819,9 @@
             </div>
             <img id="modalImage" class="modal-image" src="" alt="Property">
             <div class="modal-nav">
-                <button id="prevBtn" onclick="changeImage(-1)">← Previous</button>
+                <button id="prevBtn" onclick="changeImage(-1)">&#8592; Previous</button>
                 <span class="image-counter"><span id="currentImage">1</span> / <span id="totalImages">5</span></span>
-                <button id="nextBtn" onclick="changeImage(1)">Next →</button>
+                <button id="nextBtn" onclick="changeImage(1)">Next &#8594;</button>
             </div>
         </div>
     </div>
@@ -922,24 +915,14 @@
             e.target.reset();
         }
 
-        // Scroll Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
             renderProperties();
         });
     </script>
