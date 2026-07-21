@@ -366,6 +366,38 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
+        .property-actions { display: flex; gap: 0.7rem; }
+
+        .book-now-btn, .chat-btn {
+            flex: 1;
+            padding: 0.85rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Lora', serif;
+        }
+
+        .book-now-btn {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #fff;
+        }
+        .book-now-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201, 167, 75, 0.4); }
+
+        .chat-btn {
+            background: transparent;
+            color: var(--dark);
+            border: 1px solid var(--border-gold);
+        }
+        .chat-btn:hover { background: var(--dark); color: var(--gold-light); border-color: var(--dark); transform: translateY(-2px); }
+
         /* DHA Cards */
         .dha-card {
             border-radius: 4px;
@@ -641,6 +673,67 @@
             .section-title { font-size: 2rem; }
             .whatsapp-btn { width: 56px; height: 56px; font-size: 1.5rem; }
         }
+
+        /* ===== Book Direct (booking flow) ===== */
+        .book-steps { display: flex; justify-content: center; gap: 0; margin: 3rem 0 2.5rem; }
+        .book-step { display: flex; align-items: center; gap: 0.6rem; padding: 0 1.2rem; color: var(--text-light); font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+        .book-step-n { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-gold); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-family: 'Playfair Display', serif; }
+        .book-step.active { color: var(--text-dark); }
+        .book-step.active .book-step-n { background: var(--gold); border-color: var(--gold); color: #fff; }
+        .book-step.done .book-step-n { background: var(--dark); border-color: var(--dark); color: var(--gold-light); }
+
+        .book-card { background: #fff; border: 1px solid var(--border-gold); border-radius: 4px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); padding: 2.5rem; max-width: 800px; margin: 0 auto; }
+
+        .book-props { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
+        .book-prop { border: 1px solid var(--border-gold); border-radius: 3px; padding: 1.5rem; cursor: pointer; transition: all 0.3s; background: var(--light); }
+        .book-prop:hover { border-color: var(--gold); transform: translateY(-3px); }
+        .book-prop.selected { border-color: var(--gold); background: #fff; box-shadow: 0 8px 24px rgba(201, 167, 75, 0.2); }
+        .book-prop h3 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--text-dark); }
+        .book-prop-meta { color: var(--text-light); font-size: 0.82rem; line-height: 1.5; margin-bottom: 0.8rem; }
+        .book-prop-rate { color: var(--gold-dark); font-weight: 600; font-size: 0.95rem; }
+        .book-prop-rate span { color: var(--text-light); font-weight: 400; font-size: 0.75rem; }
+
+        .book-calwrap { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+        .book-cal { width: 280px; }
+        .book-cal .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; }
+        .book-cal .cal-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-dark); }
+        .cal-nav { background: none; border: 1px solid var(--border-gold); border-radius: 4px; width: 30px; height: 30px; cursor: pointer; color: var(--text-dark); font-size: 0.95rem; }
+        .cal-nav:hover { background: var(--cream); }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+        .cal-grid .dow { text-align: center; font-size: 0.68rem; color: var(--text-light); padding: 0.4rem 0; text-transform: uppercase; letter-spacing: 1px; }
+        .cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; border-radius: 4px; cursor: pointer; border: none; background: none; color: var(--text-mid); font-family: 'Lora', serif; }
+        .cal-day:hover:not(:disabled) { background: var(--cream); }
+        .cal-day:disabled { color: #d8d2c4; cursor: default; text-decoration: line-through; }
+        .cal-day.inrange { background: var(--cream); border-radius: 0; }
+        .cal-day.sel { background: var(--gold); color: #fff; font-weight: 600; }
+        .book-datesum { text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-mid); }
+        .book-datesum strong { color: var(--text-dark); }
+        .book-estimate { text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: var(--gold-dark); font-weight: 600; }
+        .book-estimate small { display: block; color: var(--text-light); font-weight: 400; font-size: 0.75rem; margin-top: 0.2rem; }
+        .book-loading { text-align: center; color: var(--text-light); font-size: 0.9rem; padding: 2rem 0; }
+
+        .book-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .book-form .full { grid-column: 1 / -1; }
+
+        .book-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+        .book-back { background: none; border: none; color: var(--text-light); font-size: 0.85rem; cursor: pointer; letter-spacing: 0.5px; font-family: 'Lora', serif; padding: 0.6rem; }
+        .book-back:hover { color: var(--text-dark); }
+
+        .book-success { text-align: center; padding: 1.5rem 0.5rem; }
+        .book-success .tick { width: 56px; height: 56px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+        .book-success h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.6rem; color: var(--text-dark); }
+        .book-success p { color: var(--text-mid); line-height: 1.7; max-width: 440px; margin: 0 auto 0.5rem; }
+        .book-success .wa-link { display: inline-block; margin-top: 1rem; color: var(--gold-dark); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+        .book-note { text-align: center; font-size: 0.78rem; color: var(--text-light); margin-top: 1.6rem; line-height: 1.6; }
+
+        @media (max-width: 640px) {
+            .book-card { padding: 1.5rem 1.2rem; }
+            .book-form { grid-template-columns: 1fr; }
+            .book-step span:not(.book-step-n) { display: none; }
+            .book-actions { flex-direction: column-reverse; gap: 0.8rem; }
+            .book-actions .cta-button { width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -653,6 +746,7 @@
         <ul>
             <li><a href="#properties">Properties</a></li>
             <li><a href="#why-dha">Why DHA</a></li>
+            <li><a href="#book">Book Now</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -755,6 +849,100 @@
 
     <div class="gold-divider"></div>
 
+        <!-- Book Direct Section -->
+    <section id="book" class="section section-light">
+        <div style="max-width: 820px; margin: 0 auto;">
+            <h2 class="section-title animate-on-scroll">Book Direct</h2>
+            <span class="section-title-accent animate-on-scroll"></span>
+            <p class="section-subtitle animate-on-scroll">Reserve your stay directly with us — best rate guaranteed, no platform fees. Choose your home, pick your dates, and send your request. We confirm personally and send a secure payment link.</p>
+
+            <div class="book-steps animate-on-scroll">
+                <div class="book-step active" data-step="1"><span class="book-step-n">1</span><span>Property</span></div>
+                <div class="book-step" data-step="2"><span class="book-step-n">2</span><span>Dates</span></div>
+                <div class="book-step" data-step="3"><span class="book-step-n">3</span><span>Details</span></div>
+            </div>
+
+            <div class="book-card animate-on-scroll">
+
+                <!-- Step 1: property -->
+                <div class="book-pane" id="book-pane-1">
+                    <div class="book-props" id="book-props"></div>
+                    <div class="book-actions">
+                        <span></span>
+                        <button class="cta-button" id="book-next-1" disabled>Choose Dates</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: dates -->
+                <div class="book-pane" id="book-pane-2" hidden>
+                    <div class="book-loading" id="book-cal-loading" hidden>Checking live availability…</div>
+                    <div class="book-calwrap">
+                        <div class="book-cal" id="book-cal-a"></div>
+                        <div class="book-cal" id="book-cal-b"></div>
+                    </div>
+                    <div class="book-datesum" id="book-datesum">Select your check-in date</div>
+                    <div class="book-estimate" id="book-estimate"></div>
+                    <div class="book-actions">
+                        <button class="book-back" id="book-back-2">&larr; Back</button>
+                        <button class="cta-button" id="book-next-2" disabled>Your Details</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: details -->
+                <div class="book-pane" id="book-pane-3" hidden>
+                    <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="book-form" class="book-form">
+                        <input type="hidden" name="form-name" value="booking-request">
+                        <p hidden style="display:none"><input name="bot-field"></p>
+                        <input type="hidden" name="property" id="book-f-property">
+                        <input type="hidden" name="checkin" id="book-f-checkin">
+                        <input type="hidden" name="checkout" id="book-f-checkout">
+                        <input type="hidden" name="nights" id="book-f-nights">
+                        <input type="hidden" name="estimate" id="book-f-estimate">
+                        <div>
+                            <label class="contact-label">Full Name</label>
+                            <input class="contact-input" id="book-name" name="name" required autocomplete="name">
+                        </div>
+                        <div>
+                            <label class="contact-label">Guests</label>
+                            <select class="contact-input" id="book-guests" name="guests">
+                                <option>1</option><option>2</option><option>3</option><option>4</option>
+                                <option>5</option><option>6</option><option>7</option><option>8+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="contact-label">Email</label>
+                            <input class="contact-input" id="book-email" type="email" name="email" required autocomplete="email">
+                        </div>
+                        <div>
+                            <label class="contact-label">WhatsApp / Phone</label>
+                            <input class="contact-input" id="book-phone" type="tel" name="phone" required placeholder="+92 3XX XXXXXXX" autocomplete="tel">
+                        </div>
+                        <div class="full">
+                            <label class="contact-label">Anything we should know? <span style="text-transform:none; letter-spacing:0; color:var(--text-light); font-weight:400;">(optional)</span></label>
+                            <textarea class="contact-input" id="book-msg" name="message" placeholder="Arrival time, special requests…" style="min-height:100px; resize:vertical;"></textarea>
+                        </div>
+                    </form>
+                    <div class="book-actions">
+                        <button class="book-back" id="book-back-3">&larr; Back</button>
+                        <button class="cta-button" id="book-submit">Send Booking Request</button>
+                    </div>
+                    <p class="book-note">No payment is taken now. We confirm within a few hours and send a secure Safepay link — pay by card (Visa/Mastercard), JazzCash or Easypaisa.</p>
+                </div>
+
+                <!-- Success -->
+                <div class="book-pane book-success" id="book-pane-done" hidden>
+                    <div class="tick">&#10003;</div>
+                    <h3>Request Received</h3>
+                    <p id="book-done-summary"></p>
+                    <p>We'll confirm availability and send your secure payment link by WhatsApp and email — usually within a few hours.</p>
+                    <a class="wa-link" href="https://wa.me/923239944449" target="_blank" rel="noopener">Chat with us on WhatsApp &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
     <!-- Contact Section -->
     <section id="contact" class="section section-light">
         <div style="max-width: 680px; margin: 0 auto;">
@@ -796,6 +984,7 @@
                 <h4>Navigate</h4>
                 <a href="#properties">Browse Properties</a><br>
                 <a href="#why-dha">Why DHA</a><br>
+                <a href="#book">Book Now</a><br>
                 <a href="#contact">Contact Us</a>
             </div>
             <div class="footer-section">
@@ -833,11 +1022,11 @@
 
     <script>
         const properties = [
-            { id: 1, title: "4-Bed Modern House", location: "Phase VI, D Block", price: 300000, bedrooms: 4, bathrooms: 5, description: "Spacious, fully furnished house with 5 inverter ACs, modern amenities, and premium fixtures.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/0820aa5b-839f-4fd4-acef-34695d5c9c71.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/59c1b1aa-9098-4365-ae5e-54df64dfc941.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/c949d57d-060a-4531-99ca-97e3978fcbdb.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/954b57be-e624-4aa1-ae35-03d51e4296a3.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/be1310d1-ce0b-4948-b6da-0b8ea3114620.jpeg"] },
-            { id: 2, title: "Modern Luxury with Pool", location: "Phase VI", price: 360000, bedrooms: 4, bathrooms: 5, description: "Luxury 4-bedroom house featuring private pool, 6 inverter ACs, hot tub, and premium entertainment.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/7357e8db-9953-4cf1-92bd-0eff11e1d46b.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/c8750cef-81e8-4818-8577-c6379ec5949c.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/99d15e1a-1591-4e68-96f7-00135280b7e3.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/b52a119d-e54c-4ce0-9c78-e1076023c6c5.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/729831bc-dfc0-4e7c-97d1-1a01938609f2.jpeg"] },
-            { id: 3, title: "Spacious 4-Bed Phase 5", location: "Phase V, K Block", price: 320000, bedrooms: 4, bathrooms: 5, description: "Elegant 4-bedroom home with 6 inverter ACs, 2 living rooms, spacious layout, and premium amenities.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/98f7564d-fb7f-4281-b5d8-52d0af61b75a.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/466e7ff5-47fc-48d3-8fb7-8e4662d34cba.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/f4d52908-4a5e-4fe9-89ea-bf1d050f7b8c.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/3e07e500-7a9f-4bb1-86d5-124ff126f323.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/d8effbdb-cf9d-475f-888c-d3e37f633d45.jpeg"] },
-            { id: 4, title: "Phase 4 Stylish & Safe", location: "Phase IV, Block GG", price: 310000, bedrooms: 4, bathrooms: 4.5, description: "Stylish 4-bedroom house with 6 inverter ACs, modern design, and excellent security.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/dcebdb71-a1a5-4629-a251-31ffc26337b4.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/ebae1a13-825e-48ee-876d-2befb9d94b80.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/0f9ea6b4-3bb8-4782-a643-8e015c696446.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/332e2fff-eb39-4959-9bda-3e4efdbfc414.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/f1e6313e-19c1-4c46-8a52-e3e8257c887f.jpeg"] },
-            { id: 5, title: "3-Bed Phase 5 Home", location: "Phase V, D Block", price: 240000, bedrooms: 3, bathrooms: 3, description: "Spacious 3-bedroom home with 4 inverter ACs, free maid service, and complimentary coffee/snacks.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/f6b102c1-7a34-40eb-b5aa-ef89d4ddda44.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/c3c1e507-827e-4194-9c42-e22d0066a5da.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/bb2be750-0370-4990-bd1b-8daccd8e7db0.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/bbe8a34c-eb83-47e3-8fb5-fc23a88f6a24.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/a1b582bb-6724-4969-97b6-1c5c434e7af8.jpeg"] }
+            { id: 1, title: "4-Bed Modern House", location: "Phase VI, D Block", price: 300000, nightlyRate: 10000, /* TODO Shawn: confirm nightly rate */ bedrooms: 4, bathrooms: 5, description: "Spacious, fully furnished house with 5 inverter ACs, modern amenities, and premium fixtures.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/0820aa5b-839f-4fd4-acef-34695d5c9c71.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/59c1b1aa-9098-4365-ae5e-54df64dfc941.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/c949d57d-060a-4531-99ca-97e3978fcbdb.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/954b57be-e624-4aa1-ae35-03d51e4296a3.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1521709769117247880/original/be1310d1-ce0b-4948-b6da-0b8ea3114620.jpeg"] },
+            { id: 2, title: "Modern Luxury with Pool", location: "Phase VI", price: 360000, nightlyRate: 12000, /* TODO Shawn: confirm nightly rate */ bedrooms: 4, bathrooms: 5, description: "Luxury 4-bedroom house featuring private pool, 6 inverter ACs, hot tub, and premium entertainment.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/7357e8db-9953-4cf1-92bd-0eff11e1d46b.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/c8750cef-81e8-4818-8577-c6379ec5949c.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/99d15e1a-1591-4e68-96f7-00135280b7e3.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/b52a119d-e54c-4ce0-9c78-e1076023c6c5.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1411688940582540706/original/729831bc-dfc0-4e7c-97d1-1a01938609f2.jpeg"] },
+            { id: 3, title: "Spacious 4-Bed Phase 5", location: "Phase V, K Block", price: 320000, nightlyRate: 10500, /* TODO Shawn: confirm nightly rate */ bedrooms: 4, bathrooms: 5, description: "Elegant 4-bedroom home with 6 inverter ACs, 2 living rooms, spacious layout, and premium amenities.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/98f7564d-fb7f-4281-b5d8-52d0af61b75a.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/466e7ff5-47fc-48d3-8fb7-8e4662d34cba.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/f4d52908-4a5e-4fe9-89ea-bf1d050f7b8c.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/3e07e500-7a9f-4bb1-86d5-124ff126f323.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1299122541041337509/original/d8effbdb-cf9d-475f-888c-d3e37f633d45.jpeg"] },
+            { id: 4, title: "Phase 4 Stylish & Safe", location: "Phase IV, Block GG", price: 310000, nightlyRate: 10500, /* TODO Shawn: confirm nightly rate */ bedrooms: 4, bathrooms: 4.5, description: "Stylish 4-bedroom house with 6 inverter ACs, modern design, and excellent security.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/dcebdb71-a1a5-4629-a251-31ffc26337b4.png","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/ebae1a13-825e-48ee-876d-2befb9d94b80.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/0f9ea6b4-3bb8-4782-a643-8e015c696446.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/332e2fff-eb39-4959-9bda-3e4efdbfc414.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1489771417484395895/original/f1e6313e-19c1-4c46-8a52-e3e8257c887f.jpeg"] },
+            { id: 5, title: "3-Bed Phase 5 Home", location: "Phase V, D Block", price: 240000, nightlyRate: 8000, /* TODO Shawn: confirm nightly rate */ bedrooms: 3, bathrooms: 3, description: "Spacious 3-bedroom home with 4 inverter ACs, free maid service, and complimentary coffee/snacks.", rentalType: "Both", images: ["https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/f6b102c1-7a34-40eb-b5aa-ef89d4ddda44.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/c3c1e507-827e-4194-9c42-e22d0066a5da.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/bb2be750-0370-4990-bd1b-8daccd8e7db0.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/bbe8a34c-eb83-47e3-8fb5-fc23a88f6a24.jpeg","https://a0.muscache.com/im/pictures/hosting/Hosting-1387839817237094136/original/a1b582bb-6724-4969-97b6-1c5c434e7af8.jpeg"] }
         ];
 
         let currentGallery = [];
@@ -863,7 +1052,10 @@
                         </div>
                         <div class="property-price">PKR ${prop.price.toLocaleString()}</div>
                         <p class="property-description">${prop.description}</p>
-                        <a href="https://wa.me/923239944449?text=Hi%20Nestera%2C%20I%27m%20interested%20in%20${encodeURIComponent(prop.title)}" class="view-btn" onclick="event.stopPropagation()">Inquire Now</a>
+                        <div class="property-actions">
+                            <button type="button" class="book-now-btn" onclick="event.stopPropagation(); bookProperty(${prop.id});">Book Now</button>
+                            <a href="https://wa.me/923239944449?text=Hi%20Nestera%2C%20I%27m%20interested%20in%20${encodeURIComponent(prop.title)}" class="chat-btn" onclick="event.stopPropagation()">Chat with Us</a>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -925,6 +1117,195 @@
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
             renderProperties();
         });
+    </script>
+    <script>
+    (function(){
+        /* Uses the same `properties` array already defined above (title,
+           location, price, bedrooms, nightlyRate). No duplicate data —
+           editing a property once updates both the gallery and booking flow. */
+        var CURRENCY = "PKR";
+        var AVAIL_ENDPOINT = "/.netlify/functions/availability"; // returns {blocked:[{start,end}]}
+
+        var state = { prop: null, checkin: null, checkout: null, blocked: [], month: startOfMonth(new Date()) };
+        var $ = function(id){ return document.getElementById(id); };
+
+        function startOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
+        function fmtISO(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+        function fmtNice(d){ return d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}); }
+        function addMonths(d,n){ return new Date(d.getFullYear(), d.getMonth()+n, 1); }
+        function today(){ var t=new Date(); t.setHours(0,0,0,0); return t; }
+        function isBlocked(d){
+            var iso = fmtISO(d);
+            return state.blocked.some(function(b){ return iso >= b.start && iso < b.end; });
+        }
+        function rangeHasBlocked(a,b){
+            var d = new Date(a);
+            while(d < b){ if(isBlocked(d)) return true; d.setDate(d.getDate()+1); }
+            return false;
+        }
+
+        function goStep(n){
+            [1,2,3].forEach(function(i){
+                $("book-pane-"+i).hidden = (i!==n);
+                var s = document.querySelector('.book-step[data-step="'+i+'"]');
+                s.classList.toggle("active", i===n);
+                s.classList.toggle("done", i<n);
+            });
+            $("book-pane-done").hidden = true;
+        }
+
+        function renderBookProps(){
+            var grid = $("book-props");
+            grid.innerHTML = properties.map(function(p){
+                return "<div class='book-prop' data-id='"+p.id+"'>"+
+                    "<h3>"+p.title+"</h3>"+
+                    "<div class='book-prop-meta'>"+p.location+" · "+p.bedrooms+" BR · Sleeps 8</div>"+
+                    "<div class='book-prop-rate'>"+CURRENCY+" "+p.nightlyRate.toLocaleString()+" <span>/ night</span></div>"+
+                "</div>";
+            }).join("");
+            grid.querySelectorAll(".book-prop").forEach(function(el){
+                el.addEventListener("click", function(){
+                    grid.querySelectorAll(".book-prop").forEach(function(x){ x.classList.remove("selected"); });
+                    el.classList.add("selected");
+                    state.prop = properties.find(function(p){ return String(p.id) === el.dataset.id; });
+                    $("book-next-1").disabled = false;
+                });
+            });
+        }
+
+        $("book-next-1").addEventListener("click", function(){
+            state.checkin = state.checkout = null;
+            goStep(2); loadAvailability(); renderCals(); updateDateSummary();
+        });
+        $("book-back-2").addEventListener("click", function(){ goStep(1); });
+        $("book-back-3").addEventListener("click", function(){ goStep(2); });
+
+        function loadAvailability(){
+            state.blocked = [];
+            $("book-cal-loading").hidden = false;
+            fetch(AVAIL_ENDPOINT + "?property=prop-" + state.prop.id)
+                .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+                .then(function(j){ state.blocked = j.blocked || []; })
+                .catch(function(){ /* no feed configured yet: show all dates open */ })
+                .then(function(){ $("book-cal-loading").hidden = true; renderCals(); });
+        }
+
+        function renderCals(){
+            renderCal($("book-cal-a"), state.month, true);
+            renderCal($("book-cal-b"), addMonths(state.month,1), false);
+        }
+        function renderCal(root, month, isFirst){
+            var monthName = month.toLocaleDateString("en-GB",{month:"long",year:"numeric"});
+            var html = "<div class='cal-head'>";
+            html += isFirst ? "<button class='cal-nav' data-nav='-1' aria-label='Previous month'>&larr;</button>" : "<span style='width:30px'></span>";
+            html += "<span class='cal-title'>"+monthName+"</span>";
+            html += !isFirst ? "<button class='cal-nav' data-nav='1' aria-label='Next month'>&rarr;</button>" : "<span style='width:30px'></span>";
+            html += "</div><div class='cal-grid'>";
+            ["Mo","Tu","We","Th","Fr","Sa","Su"].forEach(function(d){ html += "<span class='dow'>"+d+"</span>"; });
+            var first = new Date(month), pad = (first.getDay()+6)%7;
+            for(var i=0;i<pad;i++) html += "<span></span>";
+            var days = new Date(month.getFullYear(), month.getMonth()+1, 0).getDate();
+            for(var d=1; d<=days; d++){
+                var date = new Date(month.getFullYear(), month.getMonth(), d);
+                var cls = "cal-day", dis = "";
+                if(date < today() || isBlocked(date)) dis = "disabled";
+                if(state.checkin && fmtISO(date)===fmtISO(state.checkin)) cls += " sel";
+                if(state.checkout && fmtISO(date)===fmtISO(state.checkout)) cls += " sel";
+                if(state.checkin && state.checkout && date>state.checkin && date<state.checkout) cls += " inrange";
+                if(dis && state.checkin && !state.checkout && date > state.checkin && !rangeHasBlocked(state.checkin, date)) dis="";
+                html += "<button type='button' class='"+cls+"' data-date='"+fmtISO(date)+"' "+dis+">"+d+"</button>";
+            }
+            html += "</div>";
+            root.innerHTML = html;
+            root.querySelectorAll(".cal-nav").forEach(function(b){
+                b.addEventListener("click", function(){
+                    var next = addMonths(state.month, parseInt(b.dataset.nav,10));
+                    if(next >= startOfMonth(today())) { state.month = next; renderCals(); }
+                });
+            });
+            root.querySelectorAll(".cal-day:not(:disabled)").forEach(function(b){
+                b.addEventListener("click", function(){ pickDate(new Date(b.dataset.date+"T00:00:00")); });
+            });
+        }
+
+        function pickDate(d){
+            if(!state.checkin || state.checkout){ state.checkin = d; state.checkout = null; }
+            else if(d <= state.checkin){ state.checkin = d; }
+            else if(rangeHasBlocked(state.checkin, d)){ state.checkin = d; state.checkout = null; }
+            else { state.checkout = d; }
+            renderCals(); updateDateSummary();
+        }
+
+        function nights(){ return state.checkin && state.checkout ? Math.round((state.checkout-state.checkin)/86400000) : 0; }
+
+        function updateDateSummary(){
+            var s = $("book-datesum"), e = $("book-estimate"), n = nights();
+            if(!state.checkin){ s.innerHTML = "Select your check-in date"; e.textContent=""; }
+            else if(!state.checkout){ s.innerHTML = "Check-in <strong>"+fmtNice(state.checkin)+"</strong> — now select check-out"; e.textContent=""; }
+            else {
+                s.innerHTML = "<strong>"+fmtNice(state.checkin)+"</strong> &rarr; <strong>"+fmtNice(state.checkout)+"</strong> · "+n+" night"+(n>1?"s":"");
+                var est = n * state.prop.nightlyRate;
+                e.innerHTML = "Estimated total: "+CURRENCY+" "+est.toLocaleString()+"<small>Final amount confirmed with your payment link</small>";
+            }
+            $("book-next-2").disabled = n < 1;
+        }
+
+        $("book-next-2").addEventListener("click", function(){
+            $("book-f-property").value = state.prop.title;
+            $("book-f-checkin").value  = fmtISO(state.checkin);
+            $("book-f-checkout").value = fmtISO(state.checkout);
+            $("book-f-nights").value   = nights();
+            $("book-f-estimate").value = CURRENCY+" "+(nights()*state.prop.nightlyRate).toLocaleString();
+            goStep(3);
+        });
+
+        $("book-submit").addEventListener("click", function(){
+            var form = $("book-form");
+            if(!form.reportValidity()) return;
+            var btn = $("book-submit");
+            btn.disabled = true; btn.textContent = "Sending…";
+            var data = new URLSearchParams(new FormData(form)).toString();
+            fetch("/", { method:"POST", headers:{ "Content-Type":"application/x-www-form-urlencoded" }, body:data })
+                .then(function(r){ if(!r.ok) throw 0; showDone(); })
+                .catch(function(){
+                    var msg = "Booking request%0A" + encodeURIComponent(state.prop.title) +
+                        "%0ACheck-in: " + fmtISO(state.checkin) + "%0ACheck-out: " + fmtISO(state.checkout) +
+                        "%0AName: " + encodeURIComponent($("book-name").value) +
+                        "%0AGuests: " + encodeURIComponent($("book-guests").value);
+                    window.open("https://wa.me/923239944449?text="+msg, "_blank");
+                    showDone();
+                })
+                .then(function(){ btn.disabled=false; btn.textContent="Send Booking Request"; });
+        });
+
+        function showDone(){
+            [1,2,3].forEach(function(i){ $("book-pane-"+i).hidden = true; });
+            document.querySelectorAll(".book-step").forEach(function(s){ s.classList.add("done"); s.classList.remove("active"); });
+            $("book-done-summary").innerHTML = "<strong>"+state.prop.title+"</strong> · "+fmtNice(state.checkin)+" &rarr; "+fmtNice(state.checkout)+" · "+nights()+" night"+(nights()>1?"s":"");
+            $("book-pane-done").hidden = false;
+            $("book-pane-done").scrollIntoView({behavior:"smooth", block:"center"});
+        }
+
+        function bookProperty(id){
+            var target = properties.find(function(p){ return String(p.id) === String(id); });
+            if(!target) return;
+            state.prop = target;
+            state.checkin = state.checkout = null;
+            var grid = $("book-props");
+            if(grid){
+                grid.querySelectorAll(".book-prop").forEach(function(x){ x.classList.remove("selected"); });
+                var card = grid.querySelector('.book-prop[data-id="'+target.id+'"]');
+                if(card) card.classList.add("selected");
+            }
+            $("book-next-1").disabled = false;
+            goStep(2);
+            document.getElementById("book").scrollIntoView({behavior:"smooth", block:"start"});
+            loadAvailability(); renderCals(); updateDateSummary();
+        }
+        window.bookProperty = bookProperty;
+
+        document.addEventListener("DOMContentLoaded", renderBookProps);
+    })();
     </script>
 </body>
 </html>
